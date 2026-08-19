@@ -440,7 +440,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2400,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 179.7,
     "GWP / kg (kg CO₂e/kg)": 0.13,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "4.24",
@@ -465,7 +465,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix; Mass derived from area x 40mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-010",
@@ -492,7 +492,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1050,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 9.3,
     "GWP / kg (kg CO₂e/kg)": 0.38,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "4.27",
@@ -517,7 +517,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - bitumen"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - bitumen; Mass derived from DSR-stated coating rate 1.7 kg/sq.m"
   },
   {
     "GMAP Id": "GMAP-011",
@@ -1324,7 +1324,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1800,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 27.2,
     "GWP / kg (kg CO₂e/kg)": 0.24,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "6.13/6.21/6.5.1/6.5.2",
@@ -1349,7 +1349,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Brick class designation left blank in source BoQ per footnote ('appropriate class designation of bricks may be incorporated before calling tenders') - not a scan defect; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - brick, common fired clay"
+    "Comment": "Brick class designation left blank in source BoQ per footnote ('appropriate class designation of bricks may be incorporated before calling tenders') - not a scan defect; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - brick, common fired clay; Mass derived from area x 70mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-027",
@@ -1376,7 +1376,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1800,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 238.5,
     "GWP / kg (kg CO₂e/kg)": 0.24,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "6.18.4/6.21/6.5.1/6.5.2",
@@ -1401,7 +1401,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Brick class designation left blank in source BoQ per footnote ('appropriate class designation of bricks may be incorporated before calling tenders') - not a scan defect; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - brick, common fired clay"
+    "Comment": "Brick class designation left blank in source BoQ per footnote ('appropriate class designation of bricks may be incorporated before calling tenders') - not a scan defect; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - brick, common fired clay; Mass derived from area x 115mm thickness (from BoQ description) x density; Half-brick thickness assumed at standard 115mm nominal (not stated on scan)"
   },
   {
     "GMAP Id": "GMAP-028",
@@ -1428,7 +1428,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1800,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 894.2,
     "GWP / kg (kg CO₂e/kg)": 0.24,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "6.18.4/6.19.1/6.20/6.21.1/6.21.2",
@@ -1453,7 +1453,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Brick class designation left blank in source BoQ per footnote ('appropriate class designation of bricks may be incorporated before calling tenders') - not a scan defect; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - brick, common fired clay"
+    "Comment": "Brick class designation left blank in source BoQ per footnote ('appropriate class designation of bricks may be incorporated before calling tenders') - not a scan defect; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - brick, common fired clay; Mass derived from area x 115mm thickness (from BoQ description) x density; Half-brick thickness assumed at standard 115mm nominal (not stated on scan)"
   },
   {
     "GMAP Id": "GMAP-029",
@@ -1532,7 +1532,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 600,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 158.8,
     "GWP / kg (kg CO₂e/kg)": 0.42,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "",
@@ -1557,7 +1557,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Wood species left blank in source BoQ per the same footnote; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - timber, general hardwood sawn"
+    "Comment": "Wood species left blank in source BoQ per the same footnote; Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - timber, general hardwood sawn; Mass derived from area x 35mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-031",
@@ -1584,7 +1584,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 600,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 29.6,
     "GWP / kg (kg CO₂e/kg)": 0.42,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "9.26.4",
@@ -1609,7 +1609,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - timber, general hardwood sawn"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - timber, general hardwood sawn; Mass derived from area x 25mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-032",
@@ -2468,7 +2468,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2400,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 848.6,
     "GWP / kg (kg CO₂e/kg)": 0.13,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "11.4.2",
@@ -2493,7 +2493,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix; Mass derived from area x 40mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-049",
@@ -2520,7 +2520,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1900,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 59.1,
     "GWP / kg (kg CO₂e/kg)": 0.157,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "11.10.1",
@@ -2545,7 +2545,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general)"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general); Mass derived from area x 18mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-050",
@@ -2572,7 +2572,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2700,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 76.8,
     "GWP / kg (kg CO₂e/kg)": 0.079,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "11.16.1",
@@ -2597,7 +2597,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - marble/dimension stone"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - marble/dimension stone; Mass derived from area x 40mm thickness (from BoQ description) x density; Composite assembly: mass uses only the top finish layer's stated thickness/density; underlayer(s) of a different material are excluded"
   },
   {
     "GMAP Id": "GMAP-051",
@@ -2623,9 +2623,9 @@
     "Derived Quantity": null,
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
-    "Density (kg/m³)": 2700,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
-    "GWP / kg (kg CO₂e/kg)": 0.079,
+    "Density (kg/m³)": 2500,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 9.2,
+    "GWP / kg (kg CO₂e/kg)": 0.85,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "11.20.2",
     "Standard / Code Reference": "",
@@ -2649,7 +2649,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - marble/dimension stone"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - glass, general; Mass derived from length x 240.0 sq.mm cross-section (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-052",
@@ -2676,7 +2676,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1050,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 42.0,
     "GWP / kg (kg CO₂e/kg)": 0.38,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "12.29.1",
@@ -2701,7 +2701,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - bitumen"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - bitumen; Mass derived from DSR-stated coating rate 1.7 kg/sq.m"
   },
   {
     "GMAP Id": "GMAP-053",
@@ -2832,7 +2832,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2400,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 322.9,
     "GWP / kg (kg CO₂e/kg)": 0.13,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "N.S.I.",
@@ -2857,7 +2857,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "N.S.I. = Non-Schedule Item (rate outside DSR 1989); Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix"
+    "Comment": "N.S.I. = Non-Schedule Item (rate outside DSR 1989); Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix; Mass derived from length x 22500.0 sq.mm cross-section (from BoQ description) x density; Gola cross-section treated as full 15x15cm square; actual filleted profile is smaller, so mass is an upper-bound estimate"
   },
   {
     "GMAP Id": "GMAP-056",
@@ -2884,7 +2884,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2400,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 9.5,
     "GWP / kg (kg CO₂e/kg)": 0.13,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "12.39",
@@ -2909,7 +2909,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix; Mass derived from count x 10125.0 cu.cm volume per unit (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-057",
@@ -3196,7 +3196,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1900,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 787.5,
     "GWP / kg (kg CO₂e/kg)": 0.157,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "13.8.4",
@@ -3221,7 +3221,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general)"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general); Mass derived from area x 12mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-063",
@@ -3248,7 +3248,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1900,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 984.4,
     "GWP / kg (kg CO₂e/kg)": 0.157,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "13.9.4",
@@ -3273,7 +3273,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general)"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general); Mass derived from area x 15mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-064",
@@ -3300,7 +3300,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 1900,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 34.0,
     "GWP / kg (kg CO₂e/kg)": 0.157,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "13.25",
@@ -3325,7 +3325,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general)"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - mortar (1:6 cement:sand, general); Mass derived from area x 6mm thickness (from BoQ description) x density"
   },
   {
     "GMAP Id": "GMAP-065",
@@ -3352,7 +3352,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2700,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 76.8,
     "GWP / kg (kg CO₂e/kg)": 0.079,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "5.31/13.24.1",
@@ -3377,7 +3377,7 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - marble/dimension stone"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - marble/dimension stone; Mass derived from area x 18mm thickness (from BoQ description) x density; Composite assembly: mass uses only the top finish layer's stated thickness/density; underlayer(s) of a different material are excluded"
   },
   {
     "GMAP Id": "GMAP-066",
@@ -3820,7 +3820,7 @@
     "Derived Quantity Unit": "",
     "Derived Quantity Basis": "",
     "Density (kg/m³)": 2400,
-    "Embodied Carbon A1-A3 (kg CO₂e)": null,
+    "Embodied Carbon A1-A3 (kg CO₂e)": 539.8,
     "GWP / kg (kg CO₂e/kg)": 0.13,
     "Schedule (DSR/SOR)": "DSR 1989",
     "Schedule Item Code": "16.1",
@@ -3845,6 +3845,6 @@
     "Unit Rate": null,
     "Total Cost": null,
     "Currency": "INR",
-    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix"
+    "Comment": "Embodied carbon source: ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - concrete, 30-35 MPa, general mix; Mass derived from area x 50mm thickness (from BoQ description) x density"
   }
 ]

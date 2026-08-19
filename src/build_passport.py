@@ -41,6 +41,59 @@ def quantity_column(unit: str):
     return {"cum": "volume", "sqm": "area", "m": "length", "kg": "weight", "nos": "count"}.get(unit)
 
 
+# Area/length/count-based rows where the BoQ description states an explicit thickness,
+# cross-section or per-unit rate, letting embodied carbon be derived beyond the
+# volume/weight rows build_rows() already handles directly.
+AREA_TO_MASS = {
+    "9": ("thickness_m", 0.040),    # "40 mm thick" DPC (stated)
+    "10": ("kg_per_m2", 1.7),       # "1.7 Kg. per square metre" bitumen coat rate (stated)
+    "21": ("thickness_m", 0.070),   # "7 cm thick" brick work (stated)
+    "22": ("thickness_m", 0.115),   # half brick - ASSUMED standard 115mm nominal (not stated)
+    "23": ("thickness_m", 0.115),   # same assumption as item 22
+    "25": ("thickness_m", 0.035),   # "35 mm thick" door shutter (stated)
+    "26": ("thickness_m", 0.025),   # "25 mm thick" flush door (stated)
+    "40": ("thickness_m", 0.040),   # "40 mm thick" CC flooring (stated)
+    "41": ("thickness_m", 0.018),   # "18 mm thick" plaster skirting (stated)
+    "42": ("thickness_m", 0.040),   # marble top layer only (stated 40mm); 31mm CC underlayer ignored - different material
+    "44": ("kg_per_m2", 1.7),       # "17 Kg. per 10 square metre" bitumen roof coat rate (stated)
+    "52": ("thickness_m", 0.012),   # "12 mm" cement plaster (stated)
+    "53": ("thickness_m", 0.015),   # "15 mm" cement plaster (stated)
+    "54": ("thickness_m", 0.006),   # "6 mm" cement plaster (stated)
+    "55": ("thickness_m", 0.018),   # terrazzo top layer only (stated 18mm); 12mm plaster underlayer ignored
+    "64": ("thickness_m", 0.050),   # "50 mm thick" plinth protection (stated)
+}
+LENGTH_TO_MASS = {
+    "43": ("cross_section_m2", 0.040 * 0.006),  # glass strip 40mm wide x 6mm thick (stated cross-section)
+    "47": ("cross_section_m2", 0.15 * 0.15),    # gola 15x15cm - square upper-bound approx of the filleted profile
+}
+COUNT_TO_MASS = {
+    "48": ("volume_per_unit_m3", 0.45 * 0.45 * 0.05),  # khurra 45x45cm x 5cm avg thickness (stated) per unit
+}
+
+
+def derive_mass_kg(item_no, qcol, qty_norm, carbon):
+    """Extra mass derivation for area/length/count rows via stated thickness/rate/cross-section.
+    Returns (mass_kg, note) or (None, None). Volume/weight rows are handled inline in build_rows."""
+    if qty_norm is None or carbon is None:
+        return None, None
+    if qcol == "area" and item_no in AREA_TO_MASS:
+        kind, value = AREA_TO_MASS[item_no]
+        if kind == "thickness_m":
+            return (qty_norm * value * carbon["density"],
+                    f"Mass derived from area x {value * 1000:.0f}mm thickness (from BoQ description) x density")
+        if kind == "kg_per_m2":
+            return qty_norm * value, f"Mass derived from DSR-stated coating rate {value} kg/sq.m"
+    if qcol == "length" and item_no in LENGTH_TO_MASS:
+        _, value = LENGTH_TO_MASS[item_no]
+        return (qty_norm * value * carbon["density"],
+                f"Mass derived from length x {value * 1e6:.1f} sq.mm cross-section (from BoQ description) x density")
+    if qcol == "count" and item_no in COUNT_TO_MASS:
+        _, value = COUNT_TO_MASS[item_no]
+        return (qty_norm * value * carbon["density"],
+                f"Mass derived from count x {value * 1e6:.1f} cu.cm volume per unit (from BoQ description) x density")
+    return None, None
+
+
 def build_rows():
     """Expand ITEMS (with sub-items) into flat row dicts matching the 50-col schema."""
     rows = []
@@ -74,8 +127,19 @@ def build_rows():
                 comment_parts.append("N.S.I. = Non-Schedule Item (rate outside DSR 1989)")
 
             carbon = None if item["excluded"] else lookup_carbon(item["material"])
+            derived_mass_kg, derived_mass_note = derive_mass_kg(item["no"], qcol, qty_norm, carbon)
             if carbon:
                 comment_parts.append(f"Embodied carbon source: {carbon['source']}")
+            if derived_mass_note:
+                comment_parts.append(derived_mass_note)
+            if item["no"] in ("22", "23") and derived_mass_note:
+                comment_parts.append("Half-brick thickness assumed at standard 115mm nominal (not stated on scan)")
+            if item["no"] == "47" and derived_mass_note:
+                comment_parts.append("Gola cross-section treated as full 15x15cm square; actual filleted "
+                                      "profile is smaller, so mass is an upper-bound estimate")
+            if item["no"] in ("42", "55") and derived_mass_note:
+                comment_parts.append("Composite assembly: mass uses only the top finish layer's stated "
+                                      "thickness/density; underlayer(s) of a different material are excluded")
 
             row = {
                 "GMAP Id": f"GMAP-{gmap_seq:03d}",
@@ -118,7 +182,7 @@ def build_rows():
                 "Comment": "; ".join(comment_parts),
             }
             if carbon and qty_norm is not None and row["Weight (kg)"] is None:
-                mass_kg = None
+                mass_kg = derived_mass_kg
                 if qcol == "volume":
                     mass_kg = qty_norm * carbon["density"]
                 if mass_kg:

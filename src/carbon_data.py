@@ -7,6 +7,9 @@ Matched to materials by keyword against the `material` field in boq_items.py.
 """
 
 CARBON_REFERENCE = [
+    dict(match=("glass strip", "glass strips"),
+         density=2500, gwp_per_kg=0.850,
+         source="ICE Database v3.0 (Circular Ecology, Univ. of Bath, 2019) - glass, general"),
     dict(match=("reinforcement", "tmt", "mild steel", "cold twisted", "t-iron", "guard flat",
                 "fan clamp", "ms "),
          density=7850, gwp_per_kg=2.363,

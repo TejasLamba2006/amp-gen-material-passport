@@ -71,6 +71,22 @@ item was skipped or double-counted.
   manufacturers/brands. 40 distinct materials across 51 rows got density + GWP/kg
   values (well above the ≥5 minimum), covering concrete, steel, masonry, aluminium,
   timber, terrazzo/marble, plaster, and bitumen.
+- **Embodied carbon totals for area/length/count rows**: volume and weight rows
+  convert straight to mass. For area/length/count rows, many BoQ descriptions state
+  an explicit thickness, cross-section, or per-unit rate (e.g. item 40 "40 mm thick"
+  CC flooring, item 10 "1.7 Kg. per square metre" bitumen coat, item 43 glass strip
+  "40 mm wide and 6 mm thick"), these were parsed into a small lookup
+  (`AREA_TO_MASS`/`LENGTH_TO_MASS`/`COUNT_TO_MASS` in `build_passport.py`) and used to
+  compute a real A1-A3 total for 19 additional rows (35/51 total, up from 16/51).
+  Two entries needed a judgment call, flagged in-row via Comment: items 22/23
+  (half-brick masonry) have no thickness stated on the scan, so the standard 115mm
+  nominal is assumed; item 47 (gola) uses its full 15x15cm stated cross-section as an
+  upper-bound approximation of the actual filleted profile. Items 42 and 55 are
+  multi-layer assemblies (marble/terrazzo over a different-material underlayer) ,
+  mass uses only the top finish layer's stated thickness, and the Comment says so.
+  The remaining 16 rows (count-based ironmongery with no stated per-unit mass, item 45's
+  lime-concrete-plus-brick-tile composite, and a couple of rows with no thickness
+  stated at all) are left without a total rather than guessed.
 
 ## What worked
 
