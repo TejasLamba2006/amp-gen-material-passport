@@ -46,14 +46,23 @@ ambiguous quantities/codes is in `APPROACH.md`.
 
 ## Bonuses attempted
 
-- **B2** (embodied carbon): done, 40 distinct materials / 51 rows have Density,
-  Embodied Carbon A1-A3, and GWP/kg, sourced from ICE Database v3, cited in each row's
-  Comment field.
+- **B2** (embodied carbon): done, 40 distinct materials / 51 rows have Density and
+  GWP/kg, sourced from ICE Database v3, cited in each row's Comment field. Of those,
+  35 rows also get a computed Embodied Carbon A1-A3 total: volume/weight rows compute
+  it directly, and area/length/count rows compute it from a thickness, cross-section,
+  or per-unit rate stated in the BoQ's own description text (see `AREA_TO_MASS` /
+  `LENGTH_TO_MASS` / `COUNT_TO_MASS` in `build_passport.py`). The remaining 16 rows
+  (mostly count-based ironmongery items with no stated per-unit mass, plus a couple
+  of rows with no thickness stated at all) are left without a total rather than
+  guessed.
 - **B3** (building metadata): done, `output/building_meta.json`.
 - **B1** (live deployment): `docs/index.html` is a dependency-free static viewer
-  (fetches `output/passport.json`, renders the table + `visualization.png`). Enable it
-  via GitHub repo Settings → Pages → Deploy from branch → `main` / `/docs`; it'll be
-  live at `https://tejaslamba2006.github.io/amp-gen-material-passport/docs/`.
+  (fetches `../output/passport.json`, renders the table + `visualization.png`). It
+  reads those paths relative to `docs/`, so GitHub Pages must serve the repo **root**
+  (Settings → Pages → Deploy from branch → `main` / `/(root)`, not `/docs`: the
+  `/docs` option would only publish the `docs/` folder itself and break the relative
+  fetch to `output/`). Once enabled it's live at
+  `https://tejaslamba2006.github.io/amp-gen-material-passport/docs/`.
 - **B4** (video walkthrough): not attempted.
 
 ## Validate
