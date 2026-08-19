@@ -1,13 +1,3 @@
-"""
-Sanity-checks output/passport.json against the template's GREEN/GREY column rules.
-
-GREEN columns must be filled for every row (Schedule Item Code is exempt --
-a few DSR codes are genuinely blank in the source scan, see APPROACH.md).
-GREY columns (circularity/detachability/lifespan) must stay blank -- they're
-explicitly out of scope per the Instructions sheet.
-
-Run: python src/validate_passport.py
-"""
 import json
 import os
 import sys

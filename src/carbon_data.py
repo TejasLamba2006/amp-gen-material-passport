@@ -1,11 +1,3 @@
-"""
-Bonus B2: embodied-carbon reference data for >=5 representative materials.
-Source: Inventory of Carbon and Energy (ICE) Database v3.0, Circular Ecology /
-University of Bath (Jones & Hammond, 2019) - cradle-to-gate (A1-A3) figures,
-generic/average values (not manufacturer-specific, since the BoQ names no brand).
-Matched to materials by keyword against the `material` field in boq_items.py.
-"""
-
 CARBON_REFERENCE = [
     dict(match=("glass strip", "glass strips"),
          density=2500, gwp_per_kg=0.850,

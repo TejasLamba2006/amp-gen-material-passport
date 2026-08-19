@@ -1,25 +1,3 @@
-"""
-Raw transcription of BoQ_CBRI_Principals_Residence.pdf (Schedule 'A', items 1-64),
-read directly from the scanned dot-matrix pages via LLM vision (see APPROACH.md).
-
-Each entry is one BoQ Sl.No. `sub` holds sub-clauses (i, ii, iii...) that share the
-parent description but have their own quantity/unit/code, matching how the scan lists
-things like item 16 (centring & shuttering, 5 sub-quantities) or item 51 (CI fittings).
-
-Fields:
-  no          BoQ Sl.No. (str)
-  desc        item-of-work text (trimmed, not re-worded)
-  section     Sub-Head / schedule grouping as printed on the scan
-  qty, unit   quantity/unit as handwritten (unit exactly as printed)
-  code        DSR 1989 Code No. (col 7); "" if not legibly attributable to this item
-  material    short material/product label (judgment call)
-  category    Material Category bucket (judgment call)
-  discipline  Discipline bucket (judgment call)
-  grade       mix ratio / grade string if stated, else ""
-  excluded    reason string if this item has no real embodied material (labour/earthwork/etc), else ""
-  sub         list of {suffix, qty, unit, code} for multi-quantity items, else []
-"""
-
 ITEMS = [
     dict(no="1", section="Sub-Head - I, Earth Work", discipline="Civil & Sitework",
          desc="Earth work in excavation in foundation trenches or drains not exceeding 1.5 m in width or "

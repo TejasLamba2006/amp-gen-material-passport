@@ -1,9 +1,3 @@
-"""
-Builds output/passport_filled.xlsx, output/passport.json, output/building_meta.json
-and output/visualization.png from src/boq_items.py.
-
-Run: python src/build_passport.py
-"""
 import json
 import os
 import sys
@@ -28,7 +22,6 @@ UNIT_MAP = {
 
 
 def normalize_unit(raw_unit: str):
-    """Returns (normalized_unit, quantity_multiplier, derived_note)."""
     u = (raw_unit or "").strip().lower()
     if u == "100 sq.m":
         return "sqm", 100.0, "Unit printed as '100 Sq.m' (DSR per-100-sqm convention); quantity multiplied by 100"
@@ -41,39 +34,34 @@ def quantity_column(unit: str):
     return {"cum": "volume", "sqm": "area", "m": "length", "kg": "weight", "nos": "count"}.get(unit)
 
 
-# Area/length/count-based rows where the BoQ description states an explicit thickness,
-# cross-section or per-unit rate, letting embodied carbon be derived beyond the
-# volume/weight rows build_rows() already handles directly.
 AREA_TO_MASS = {
-    "9": ("thickness_m", 0.040),    # "40 mm thick" DPC (stated)
-    "10": ("kg_per_m2", 1.7),       # "1.7 Kg. per square metre" bitumen coat rate (stated)
-    "21": ("thickness_m", 0.070),   # "7 cm thick" brick work (stated)
-    "22": ("thickness_m", 0.115),   # half brick - ASSUMED standard 115mm nominal (not stated)
-    "23": ("thickness_m", 0.115),   # same assumption as item 22
-    "25": ("thickness_m", 0.035),   # "35 mm thick" door shutter (stated)
-    "26": ("thickness_m", 0.025),   # "25 mm thick" flush door (stated)
-    "40": ("thickness_m", 0.040),   # "40 mm thick" CC flooring (stated)
-    "41": ("thickness_m", 0.018),   # "18 mm thick" plaster skirting (stated)
-    "42": ("thickness_m", 0.040),   # marble top layer only (stated 40mm); 31mm CC underlayer ignored - different material
-    "44": ("kg_per_m2", 1.7),       # "17 Kg. per 10 square metre" bitumen roof coat rate (stated)
-    "52": ("thickness_m", 0.012),   # "12 mm" cement plaster (stated)
-    "53": ("thickness_m", 0.015),   # "15 mm" cement plaster (stated)
-    "54": ("thickness_m", 0.006),   # "6 mm" cement plaster (stated)
-    "55": ("thickness_m", 0.018),   # terrazzo top layer only (stated 18mm); 12mm plaster underlayer ignored
-    "64": ("thickness_m", 0.050),   # "50 mm thick" plinth protection (stated)
+    "9": ("thickness_m", 0.040),
+    "10": ("kg_per_m2", 1.7),
+    "21": ("thickness_m", 0.070),
+    "22": ("thickness_m", 0.115),
+    "23": ("thickness_m", 0.115),
+    "25": ("thickness_m", 0.035),
+    "26": ("thickness_m", 0.025),
+    "40": ("thickness_m", 0.040),
+    "41": ("thickness_m", 0.018),
+    "42": ("thickness_m", 0.040),
+    "44": ("kg_per_m2", 1.7),
+    "52": ("thickness_m", 0.012),
+    "53": ("thickness_m", 0.015),
+    "54": ("thickness_m", 0.006),
+    "55": ("thickness_m", 0.018),
+    "64": ("thickness_m", 0.050),
 }
 LENGTH_TO_MASS = {
-    "43": ("cross_section_m2", 0.040 * 0.006),  # glass strip 40mm wide x 6mm thick (stated cross-section)
-    "47": ("cross_section_m2", 0.15 * 0.15),    # gola 15x15cm - square upper-bound approx of the filleted profile
+    "43": ("cross_section_m2", 0.040 * 0.006),
+    "47": ("cross_section_m2", 0.15 * 0.15),
 }
 COUNT_TO_MASS = {
-    "48": ("volume_per_unit_m3", 0.45 * 0.45 * 0.05),  # khurra 45x45cm x 5cm avg thickness (stated) per unit
+    "48": ("volume_per_unit_m3", 0.45 * 0.45 * 0.05),
 }
 
 
 def derive_mass_kg(item_no, qcol, qty_norm, carbon):
-    """Extra mass derivation for area/length/count rows via stated thickness/rate/cross-section.
-    Returns (mass_kg, note) or (None, None). Volume/weight rows are handled inline in build_rows."""
     if qty_norm is None or carbon is None:
         return None, None
     if qcol == "area" and item_no in AREA_TO_MASS:
@@ -94,8 +82,50 @@ def derive_mass_kg(item_no, qcol, qty_norm, carbon):
     return None, None
 
 
+def _row_comment(item, e, unit_note, carbon, derived_mass_note):
+    parts = []
+    if item["excluded"]:
+        parts.append(f"[EXCLUDED] {item['excluded']}")
+    if unit_note:
+        parts.append(unit_note)
+    if item["no"] == "17" and e.get("suffix") == "ii":
+        parts.append("Scan shows alternate qty 1500.0 Kg marked * for Seismic Zone V; "
+                      "1375.0 Kg used as base figure (ambiguous which value the * applies to)")
+    if item["no"] in ("19", "20", "21", "22", "23"):
+        parts.append("Brick class designation left blank in source BoQ per footnote "
+                      "('appropriate class designation of bricks may be incorporated "
+                      "before calling tenders') - not a scan defect")
+    if item["no"] in ("24", "25"):
+        parts.append("Wood species left blank in source BoQ per the same footnote")
+    if e.get("code") in ("N.S.I.",):
+        parts.append("N.S.I. = Non-Schedule Item (rate outside DSR 1989)")
+    if carbon:
+        parts.append(f"Embodied carbon source: {carbon['source']}")
+    if derived_mass_note:
+        parts.append(derived_mass_note)
+    if item["no"] in ("22", "23") and derived_mass_note:
+        parts.append("Half-brick thickness assumed at standard 115mm nominal (not stated on scan)")
+    if item["no"] == "47" and derived_mass_note:
+        parts.append("Gola cross-section treated as full 15x15cm square; actual filleted "
+                      "profile is smaller, so mass is an upper-bound estimate")
+    if item["no"] in ("42", "55") and derived_mass_note:
+        parts.append("Composite assembly: mass uses only the top finish layer's stated "
+                      "thickness/density; underlayer(s) of a different material are excluded")
+    return "; ".join(parts)
+
+
+def _embodied_carbon_kg(qcol, carbon, qty_norm, derived_mass_kg, weight_kg):
+    if not carbon:
+        return None
+    if weight_kg is not None:
+        return round(weight_kg * carbon["gwp_per_kg"], 1)
+    if qty_norm is None:
+        return None
+    mass_kg = qty_norm * carbon["density"] if qcol == "volume" else derived_mass_kg
+    return round(mass_kg * carbon["gwp_per_kg"], 1) if mass_kg else None
+
+
 def build_rows():
-    """Expand ITEMS (with sub-items) into flat row dicts matching the 50-col schema."""
     rows = []
     gmap_seq = 1
     for item in ITEMS:
@@ -109,37 +139,9 @@ def build_rows():
             qty_norm = round(qty_raw * mult, 4) if qty_raw is not None else None
             qcol = quantity_column(unit_norm) if qty_norm is not None else None
 
-            comment_parts = []
-            if item["excluded"]:
-                comment_parts.append(f"[EXCLUDED] {item['excluded']}")
-            if unit_note:
-                comment_parts.append(unit_note)
-            if item["no"] == "17" and e.get("suffix") == "ii":
-                comment_parts.append("Scan shows alternate qty 1500.0 Kg marked * for Seismic Zone V; "
-                                      "1375.0 Kg used as base figure (ambiguous which value the * applies to)")
-            if item["no"] in ("19", "20", "21", "22", "23"):
-                comment_parts.append("Brick class designation left blank in source BoQ per footnote "
-                                      "('appropriate class designation of bricks may be incorporated "
-                                      "before calling tenders') - not a scan defect")
-            if item["no"] in ("24", "25"):
-                comment_parts.append("Wood species left blank in source BoQ per the same footnote")
-            if e.get("code") in ("N.S.I.",):
-                comment_parts.append("N.S.I. = Non-Schedule Item (rate outside DSR 1989)")
-
             carbon = None if item["excluded"] else lookup_carbon(item["material"])
             derived_mass_kg, derived_mass_note = derive_mass_kg(item["no"], qcol, qty_norm, carbon)
-            if carbon:
-                comment_parts.append(f"Embodied carbon source: {carbon['source']}")
-            if derived_mass_note:
-                comment_parts.append(derived_mass_note)
-            if item["no"] in ("22", "23") and derived_mass_note:
-                comment_parts.append("Half-brick thickness assumed at standard 115mm nominal (not stated on scan)")
-            if item["no"] == "47" and derived_mass_note:
-                comment_parts.append("Gola cross-section treated as full 15x15cm square; actual filleted "
-                                      "profile is smaller, so mass is an upper-bound estimate")
-            if item["no"] in ("42", "55") and derived_mass_note:
-                comment_parts.append("Composite assembly: mass uses only the top finish layer's stated "
-                                      "thickness/density; underlayer(s) of a different material are excluded")
+            comment = _row_comment(item, e, unit_note, carbon, derived_mass_note)
 
             row = {
                 "GMAP Id": f"GMAP-{gmap_seq:03d}",
@@ -179,16 +181,10 @@ def build_rows():
                 "Length (mm)": None, "Width (mm)": None, "Height (mm)": None, "Thickness (mm)": None,
                 "Depth (mm)": None, "Diameter (mm)": None,
                 "Unit Rate": None, "Total Cost": None, "Currency": "INR",
-                "Comment": "; ".join(comment_parts),
+                "Comment": comment,
             }
-            if carbon and qty_norm is not None and row["Weight (kg)"] is None:
-                mass_kg = derived_mass_kg
-                if qcol == "volume":
-                    mass_kg = qty_norm * carbon["density"]
-                if mass_kg:
-                    row["Embodied Carbon A1-A3 (kg CO₂e)"] = round(mass_kg * carbon["gwp_per_kg"], 1)
-            elif carbon and row["Weight (kg)"]:
-                row["Embodied Carbon A1-A3 (kg CO₂e)"] = round(row["Weight (kg)"] * carbon["gwp_per_kg"], 1)
+            row["Embodied Carbon A1-A3 (kg CO₂e)"] = _embodied_carbon_kg(
+                qcol, carbon, qty_norm, derived_mass_kg, row["Weight (kg)"])
 
             rows.append(row)
             gmap_seq += 1
