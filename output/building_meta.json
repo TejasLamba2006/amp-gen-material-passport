@@ -1,0 +1,15 @@
+{
+  "name_of_work": "Construction of Principal's Residence (General-Modified), CBRI Roorkee",
+  "location": "Central Building Research Institute (CBRI), Roorkee, Uttarakhand, India",
+  "schedule": "Schedule 'A'",
+  "depth_of_foundation_m": 0.6,
+  "plinth_height_m": 0.45,
+  "plinth_area_sqm": 90.6,
+  "no_of_boq_items": 64,
+  "seismic_zone": "Zone I-IV (base design); Zone V alternate reinforcement noted for item 17.ii",
+  "safe_bearing_capacity": "10 T/Sq.m and above",
+  "class_designation_of_soil": null,
+  "class_designation_of_soil_note": "Illegible - physically cut off at the bottom edge of the scanned page 1 (confirmed via 400 DPI crop render, not a rendering artifact)",
+  "rate_schedule": "DSR 1989 (Delhi Schedule of Rates)",
+  "source_document": "BoQ_CBRI_Principals_Residence.pdf"
+}
