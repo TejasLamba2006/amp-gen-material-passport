@@ -9,10 +9,13 @@ No local OCR engine (tesseract) was installed, and classical OCR is a poor fit h
 regardless: dot-matrix fonts and handwriting are exactly the cases where OCR engines
 produce garbled, low-confidence output that still needs manual verification.
 
-Instead I rendered each page to a PNG at 200 DPI with **PyMuPDF** (`fitz`) and read the
-images directly as a vision task, transcribing all 64 BoQ line items (descriptions,
-quantities, units, DSR 1989 codes) by eye. This is the disclosed method per the task's
-own ground rules ("Any tools/LLMs/OCR allowed, but disclose in APPROACH.md"). One page-1
+Instead I rendered each page to a PNG at 200 DPI with **PyMuPDF** (`fitz`) and had
+**Claude (Sonnet 5)** read the images directly as a vision task, transcribing all 64
+BoQ line items (descriptions, quantities, units, DSR 1989 codes) into `boq_items.py`.
+I chose it as the strongest vision model I had access to for this kind of dot-matrix
+plus handwriting mix, then reviewed its output against the scans myself rather than
+transcribing by hand. This is the disclosed method per the task's own ground rules
+("Any tools/LLMs/OCR allowed, but disclose in APPROACH.md"). One page-1
 field ("Class Designation of [soil]") is physically cut off at the bottom edge of the
 scan (confirmed with a 400 DPI crop of that region, not a rendering artifact), so it's
 recorded as `null` in `building_meta.json` with a note.
@@ -90,9 +93,9 @@ no item was skipped or double-counted.
 
 ## What worked
 
-- Vision-based transcription handled the dot-matrix + handwritten mix reliably; cross-
-  checking the "No of Items: 64" footer against the actual transcribed count caught
-  that nothing was skipped.
+- Claude's vision transcription handled the dot-matrix + handwritten mix reliably;
+  cross-checking the "No of Items: 64" footer against the actual transcribed count
+  caught that nothing was skipped.
 - A single data file (`boq_items.py`) + one build script kept the pipeline reproducible
   and let unit normalization / carbon lookup / column mapping be verified in one pass
   rather than 74 manual spreadsheet edits.

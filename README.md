@@ -21,8 +21,9 @@ Outputs land in `output/`:
 
 ## What's in `src/`
 
-- `boq_items.py`: raw transcription of all 64 BoQ items (source of truth, hand-read
-  from the scanned pages; see APPROACH.md for why)
+- `boq_items.py`: raw transcription of all 64 BoQ items (source of truth, transcribed
+  by Claude Sonnet 5 reading the scanned pages directly, reviewed by hand; see
+  APPROACH.md for why)
 - `carbon_data.py`: ICE Database v3 embodied-carbon reference table (Bonus B2)
 - `build_passport.py`: pipeline that expands sub-items, normalizes units, maps to
   Volume/Area/Length/Weight/Count, computes embodied carbon, and writes all 4 outputs
