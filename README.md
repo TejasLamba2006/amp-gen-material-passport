@@ -1,7 +1,7 @@
 # AMP-GEN AI/ML Intern Take-Home: Material Passport Extraction
 
 Extracts all 64 BoQ line items (74 rows once multi-quantity sub-items are expanded)
-from `BoQ_CBRI_Principals_Residence.pdf`: a scanned, dot-matrix + handwritten Bill of
+from `BoQ_CBRI_Principals_Residence.pdf`, a scanned, dot-matrix + handwritten Bill of
 Quantities, and classifies them into `AMP_Passport_Template.xlsx`'s Material Passport
 schema.
 
