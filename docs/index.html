@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AMP-GEN Material Passport — CBRI Principal's Residence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem; color: #1a1a1a; }
+  h1 { font-size: 1.3rem; }
+  img { max-width: 100%; border: 1px solid #ddd; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; }
+  th, td { border: 1px solid #ddd; padding: 4px 6px; text-align: left; white-space: nowrap; }
+  th { background: #2b7a78; color: white; position: sticky; top: 0; }
+  td { max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
+  #wrap { overflow-x: auto; max-height: 70vh; }
+  #status { color: #666; }
+</style>
+</head>
+<body>
+<h1>AMP-GEN Material Passport — CBRI Principal's Residence BoQ</h1>
+<p id="status">Loading output/passport.json…</p>
+<img src="../output/visualization.png" alt="Material category distribution chart" />
+<div id="wrap"></div>
+
+<script>
+const COLS = ["BOQ Item No.", "Description", "Floor / Section", "Discipline",
+  "Material / Product", "Material Category", "Original Quantity", "Original Unit",
+  "Schedule Item Code", "Comment"];
+
+fetch("../output/passport.json")
+  .then(r => r.json())
+  .then(rows => {
+    document.getElementById("status").textContent = `${rows.length} rows`;
+    const table = document.createElement("table");
+    const thead = table.insertRow();
+    COLS.forEach(c => { const th = document.createElement("th"); th.textContent = c; thead.appendChild(th); });
+    rows.forEach(row => {
+      const tr = table.insertRow();
+      COLS.forEach(c => { const td = tr.insertCell(); td.textContent = row[c] ?? ""; td.title = row[c] ?? ""; });
+    });
+    document.getElementById("wrap").appendChild(table);
+  })
+  .catch(e => { document.getElementById("status").textContent = "Failed to load passport.json: " + e; });
+</script>
+</body>
+</html>
